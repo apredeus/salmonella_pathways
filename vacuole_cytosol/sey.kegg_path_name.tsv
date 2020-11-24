@@ -1,0 +1,197 @@
+Colgan_2016_barA_sirA_dn	Genes down-regulated in barA-sirA mutant
+Colgan_2016_dam_dn	Genes down-regulated in dam mutant
+Colgan_2016_dam_up	Genes up-regulated in dam mutant
+Colgan_2016_fliZ_dn	Genes down-regulated in fliZ mutant
+Colgan_2016_fliZ_up	Genes up-regulated in fliZ mutant
+Colgan_2016_fur_dn	Genes down-regulated in fur mutant
+Colgan_2016_fur_up	Genes up-regulated in fur mutant
+Colgan_2016_hfq_dn	Genes down-regulated in hfq mutant
+Colgan_2016_hfq_up	Genes up-regulated in hfq mutant
+Colgan_2016_hilA_dn	Genes down-regulated in hilA mutant
+Colgan_2016_hilC_dn	Genes down-regulated in hilC mutant
+Colgan_2016_hilC_up	Genes up-regulated in hilC mutant
+Colgan_2016_hilD_ESP_dn	Genes down-regulated in hilD mutant in early stationary phase
+Colgan_2016_hilD_ESP_up	Genes up-regulated in hilD mutant in early stationary phase
+Colgan_2016_hilD_IEP_dn	Genes down-regulated in hilD mutant mid-exponential phase
+Colgan_2016_hilE_dn	Genes down-regulated in hilE mutant
+Colgan_2016_ompR_envZ_dn	Genes down-regulated in ompR-envZ mutant
+Colgan_2016_ompR_envZ_up	Genes up-regulated in ompR-envZ mutant
+Colgan_2016_phoPQ_dn	Genes down-regulated in phoPQ mutant
+Colgan_2016_phoPQ_up	Genes up-regulated in phoPQ mutant
+Colgan_2016_rpoS_dn	Genes down-regulated in rpoS mutant
+Colgan_2016_rpoS_up	Genes up-regulated in rpoS mutant
+Colgan_2016_slyA_dn	Genes down-regulated in slyA mutant
+Colgan_2016_slyA_up	Genes up-regulated in slyA mutant
+Colgan_2016_ssrA_dn	Genes down-regulated in ssrA mutant
+Colgan_2016_ssrA_up	Genes up-regulated in ssrA mutant
+Colgan_2016_ssrB_dn	Genes down-regulated in ssrB mutant
+Colgan_2016_ssrB_up	Genes up-regulated in ssrB mutant
+D23_25C	D23580 genes up-regulated upon 25C shock
+D23_Bile	D23580 genes up-regulated upon bile acid shock
+D23_EEP	D23580 genes up-regulated in early exponential phase
+D23_ESP	D23580 genes up-regulated in early stationary phase
+D23_InSPI2	D23580 genes up-regulated under InSPI2 conditions
+D23_LEP	D23580 genes up-regulated in late exponential phase
+D23_Low_Fe	D23580 genes up-regulated upon low Fe shock
+D23_LSP	D23580 genes up-regulated in late stationary phase
+D23_Macrophage	D23580 genes up-regulated in macrophages
+D23_MEP	D23580 genes up-regulated in mid-exponential phase
+D23_NaCl	D23580 genes up-regulated upon NaCl shock
+D23_NO	D23580 genes up-regulated upon nitric oxide shock
+D23_NonSPI2	D23580 genes up-regulated under NonSPI2 conditions
+D23_NoO2	D23580 genes up-regulated upon anaerobic growth
+D23_NoO2S	D23580 genes up-regulated upon anaerobic shock
+D23_Oxygen	D23580 genes up-regulated upon oxygen shock
+D23_Peroxide	D23580 genes up-regulated upon peroxide shock
+Fink_2007_fnr_dn	Genes down-regulated in fnr mutant
+Fink_2007_fnr_up	Genes up-regulated in fnr mutant
+Iron	Curated list of iron transporters and siderophores
+Smith_2016_hilA_dn	Genes down-regulated in hilA mutant
+Smith_2016_hilC_dn	Genes down-regulated in hilC mutant
+Smith_2016_hilC_up	Genes up-regulated in hilC mutant
+Smith_2016_hilD_dn	Genes down-regulated in hilD mutant
+Smith_2016_hilD_up	Genes up-regulated in hilD mutant
+Smith_2016_invF_dn	Genes down-regulated in invF mutant
+Smith_2016_rtsA_dn	Genes down-regulated in rtsA mutant
+Smith_2016_rtsB_dn	Genes down-regulated in rtsB mutant
+Smith_2016_rtsB_up	Genes up-regulated in rtsB mutant
+Smith_2016_sprB_dn	Genes down-regulated in sprB mutant
+Smith_2016_sprB_up	Genes up-regulated in sprB mutant
+SPI1_eff	SPI-1 genes and effectors
+SPI2_eff	SPI-2 genes and effectors
+ST474_25C	474 genes up-regulated upon 25C shock
+ST474_Bile	474 genes up-regulated upon bile acid shock
+ST474_EEP	474 genes up-regulated in early exponential phase
+ST474_ESP	474 genes up-regulated in early stationary phase
+ST474_InSPI2	474 genes up-regulated under InSPI2 conditions
+ST474_LEP	474 genes up-regulated in late exponential phase
+ST474_Low_Fe	474 genes up-regulated upon low Fe shock
+ST474_LSP	474 genes up-regulated in late stationary phase
+ST474_Macrophage	474 genes up-regulated in macrophages
+ST474_MEP	474 genes up-regulated in mid-exponential phase
+ST474_NaCl	474 genes up-regulated upon NaCl shock
+ST474_NO	474 genes up-regulated upon nitric oxide shock
+ST474_NonSPI2	474 genes up-regulated under NonSPI2 conditions
+ST474_NoO2	474 genes up-regulated upon anaerobic growth
+ST474_NoO2S	474 genes up-regulated upon anaerobic shock
+ST474_Oxygen	474 genes up-regulated upon oxygen shock
+ST474_Peroxide	474 genes up-regulated upon peroxide shock
+Troxell_2011_fur_dn	Genes down-regulated in fur mutant
+Troxell_2011_fur_up	Genes up-regulated in fur mutant
+path:sey00010	Glycolysis / Gluconeogenesis
+path:sey00020	Citrate cycle (TCA cycle)
+path:sey00030	Pentose phosphate pathway
+path:sey00040	Pentose and glucuronate interconversions
+path:sey00051	Fructose and mannose metabolism
+path:sey00052	Galactose metabolism
+path:sey00053	Ascorbate and aldarate metabolism
+path:sey00061	Fatty acid biosynthesis
+path:sey00071	Fatty acid degradation
+path:sey00130	Ubiquinone and other terpenoid-quinone biosynthesis
+path:sey00190	Oxidative phosphorylation
+path:sey00220	Arginine biosynthesis
+path:sey00230	Purine metabolism
+path:sey00240	Pyrimidine metabolism
+path:sey00250	Alanine, aspartate and glutamate metabolism
+path:sey00260	Glycine, serine and threonine metabolism
+path:sey00261	Monobactam biosynthesis
+path:sey00270	Cysteine and methionine metabolism
+path:sey00280	Valine, leucine and isoleucine degradation
+path:sey00281	Geraniol degradation
+path:sey00290	Valine, leucine and isoleucine biosynthesis
+path:sey00300	Lysine biosynthesis
+path:sey00310	Lysine degradation
+path:sey00330	Arginine and proline metabolism
+path:sey00332	Carbapenem biosynthesis
+path:sey00340	Histidine metabolism
+path:sey00350	Tyrosine metabolism
+path:sey00360	Phenylalanine metabolism
+path:sey00361	Chlorocyclohexane and chlorobenzene degradation
+path:sey00362	Benzoate degradation
+path:sey00364	Fluorobenzoate degradation
+path:sey00380	Tryptophan metabolism
+path:sey00400	Phenylalanine, tyrosine and tryptophan biosynthesis
+path:sey00401	Novobiocin biosynthesis
+path:sey00410	beta-Alanine metabolism
+path:sey00430	Taurine and hypotaurine metabolism
+path:sey00440	Phosphonate and phosphinate metabolism
+path:sey00450	Selenocompound metabolism
+path:sey00460	Cyanoamino acid metabolism
+path:sey00471	D-Glutamine and D-glutamate metabolism
+path:sey00472	D-Arginine and D-ornithine metabolism
+path:sey00473	D-Alanine metabolism
+path:sey00480	Glutathione metabolism
+path:sey00500	Starch and sucrose metabolism
+path:sey00520	Amino sugar and nucleotide sugar metabolism
+path:sey00521	Streptomycin biosynthesis
+path:sey00523	Polyketide sugar unit biosynthesis
+path:sey00525	Acarbose and validamycin biosynthesis
+path:sey00540	Lipopolysaccharide biosynthesis
+path:sey00550	Peptidoglycan biosynthesis
+path:sey00561	Glycerolipid metabolism
+path:sey00562	Inositol phosphate metabolism
+path:sey00564	Glycerophospholipid metabolism
+path:sey00565	Ether lipid metabolism
+path:sey00590	Arachidonic acid metabolism
+path:sey00592	alpha-Linolenic acid metabolism
+path:sey00600	Sphingolipid metabolism
+path:sey00620	Pyruvate metabolism
+path:sey00623	Toluene degradation
+path:sey00625	Chloroalkane and chloroalkene degradation
+path:sey00626	Naphthalene degradation
+path:sey00627	Aminobenzoate degradation
+path:sey00630	Glyoxylate and dicarboxylate metabolism
+path:sey00633	Nitrotoluene degradation
+path:sey00640	Propanoate metabolism
+path:sey00650	Butanoate metabolism
+path:sey00660	C5-Branched dibasic acid metabolism
+path:sey00670	One carbon pool by folate
+path:sey00680	Methane metabolism
+path:sey00730	Thiamine metabolism
+path:sey00740	Riboflavin metabolism
+path:sey00750	Vitamin B6 metabolism
+path:sey00760	Nicotinate and nicotinamide metabolism
+path:sey00770	Pantothenate and CoA biosynthesis
+path:sey00780	Biotin metabolism
+path:sey00785	Lipoic acid metabolism
+path:sey00790	Folate biosynthesis
+path:sey00860	Porphyrin and chlorophyll metabolism
+path:sey00900	Terpenoid backbone biosynthesis
+path:sey00903	Limonene and pinene degradation
+path:sey00910	Nitrogen metabolism
+path:sey00920	Sulfur metabolism
+path:sey00930	Caprolactam degradation
+path:sey00970	Aminoacyl-tRNA biosynthesis
+path:sey01040	Biosynthesis of unsaturated fatty acids
+path:sey01053	Biosynthesis of siderophore group nonribosomal peptides
+path:sey01054	Nonribosomal peptide structures
+path:sey01100	Metabolic pathways
+path:sey01110	Biosynthesis of secondary metabolites
+path:sey01120	Microbial metabolism in diverse environments
+path:sey01200	Carbon metabolism
+path:sey01210	2-Oxocarboxylic acid metabolism
+path:sey01212	Fatty acid metabolism
+path:sey01220	Degradation of aromatic compounds
+path:sey01230	Biosynthesis of amino acids
+path:sey01501	beta-Lactam resistance
+path:sey01502	Vancomycin resistance
+path:sey01503	Cationic antimicrobial peptide (CAMP) resistance
+path:sey02010	ABC transporters
+path:sey02020	Two-component system
+path:sey02024	Quorum sensing
+path:sey02030	Bacterial chemotaxis
+path:sey02040	Flagellar assembly
+path:sey02060	Phosphotransferase system (PTS)
+path:sey03010	Ribosome
+path:sey03018	RNA degradation
+path:sey03020	RNA polymerase
+path:sey03030	DNA replication
+path:sey03060	Protein export
+path:sey03070	Bacterial secretion system
+path:sey03410	Base excision repair
+path:sey03420	Nucleotide excision repair
+path:sey03430	Mismatch repair
+path:sey03440	Homologous recombination
+path:sey04122	Sulfur relay system
+path:sey05100	Bacterial invasion of epithelial cells
+path:sey05132	Salmonella infection
