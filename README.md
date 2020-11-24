@@ -1,8 +1,8 @@
 # Salmonella pathways
 
-When analyzing gene expression and regulation, custom curated pathways are often used to analyze the observed expression changes using Fisher's exact test or GSEA. However, many organisms lack such pathways, leaving only generic sources like KEGG or GO. This collection of curated Salmonella gene sets was obtained from published RNA-seq experiments of wild-type and mutant *Salmonella* strains. 
+When analyzing gene expression and regulation, custom curated pathways are often used to analyze the observed expression changes using Fisher's exact test or GSEA. However, many organisms lack such pathways, leaving only generic sources like KEGG or GO. In particular, curated pathways are not available for *Salmonella enterica*. This collection of curated pathways was obtained from published RNA-seq experiments of wild-type and mutant *Salmonella* strains. 
 
-Final collection of pathways is given using SL1344 gene IDs. These could be easily converted between strains using ortholog tables given in **orthologs** subdirectory. 
+Our pathways here are reported using SL1344 gene IDs. If you prefer other gene IDs (e.g. STM from LT2), they can be easily converted using ortholog table given in **orthologs** subdirectory. 
 
 ## Sources
 
