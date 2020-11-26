@@ -54,11 +54,11 @@ Cytosol <- read.table("Cytosol.tsv",header = T,sep = "\t")
 Cyt_list <- as.vector(Cytosol[Cytosol$SL1344_fixed != "NONE",]$SL1344_fixed)
 #write.table(cyt_list,"cyt_stm.list",quote = F, row.names = F, col.names = F)
 
-en_vac_path <- enricher(Vac_list, universe = SL_uni, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
-en_vac_go   <- enricher(Vac_list, universe = SL_uni, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
+en_vac_path <- enricher(Vac_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
+en_vac_go   <- enricher(Vac_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
 
-en_cyt_path <- enricher(Cyt_list, universe = SL_uni, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
-en_cyt_go   <- enricher(Cyt_list, universe = SL_uni, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
+en_cyt_path <- enricher(Cyt_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
+en_cyt_go   <- enricher(Cyt_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
 
 ## annotate with pathway/GO names
 for (i in 1:length(en_vac_go@result$ID)) {
