@@ -6,7 +6,7 @@ Our pathways here are reported using SL1344 gene IDs. If you prefer other gene I
 
 ## Publication 
 
-TuShun R. Powers, Amanda L. Haeberle, Disa L. Hammarlöf, Jennifer A. Cundiff, Alexander V. Predeus, Karsten Hokamp, Jay C.D. Hinton, Leigh A. Knodler, [Niche-specific profiling reveals transcriptional adaptations required for the cytosolic lifestyle of Salmonella enterica(https://www.biorxiv.org/content/10.1101/2021.01.11.426201v2)
+TuShun R. Powers, Amanda L. Haeberle, Disa L. Hammarlöf, Jennifer A. Cundiff, Alexander V. Predeus, Karsten Hokamp, Jay C.D. Hinton, Leigh A. Knodler, [Niche-specific profiling reveals transcriptional adaptations required for the cytosolic lifestyle of Salmonella enterica](https://www.biorxiv.org/content/10.1101/2021.01.11.426201v2)
 
 ## Sources
 
