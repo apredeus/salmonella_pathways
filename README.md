@@ -1,16 +1,16 @@
 # Salmonella pathways
 
-When analyzing gene expression and regulation, custom curated pathways are often used to analyze the observed expression changes using Fisher's exact test or GSEA. However, many organisms lack such pathways, leaving only generic sources like KEGG or GO. In particular, curated pathways are not available for *Salmonella enterica*. This collection of curated pathways was obtained from published RNA-seq experiments of wild-type and mutant *Salmonella* strains. 
+When analyzing gene expression and regulation, custom curated pathways are often used to analyze the observed expression changes using Fisher's exact test or GSEA. However, many organisms lack such pathways, leaving only generic sources like KEGG or GO. In particular, curated pathways are not available for *Salmonella enterica*. This collection of curated pathways was obtained from published RNA-seq experiments of wild-type and mutant *Salmonella* strains, and was found to be very useful in our analysis (see the **Use case** below).  
 
-Our pathways here are reported using SL1344 gene IDs. If you prefer other gene IDs (e.g. STM from LT2), they can be easily converted using ortholog table given in **orthologs** subdirectory. 
+Pathways are reported in SL1344 gene IDs. If you prefer other gene IDs (e.g. STM from LT2), they can be easily converted using ortholog table given in `/orthologs` subdirectory. 
 
 ## Publication 
 
-TuShun R. Powers, Amanda L. Haeberle, Disa L. Hammarlöf, Jennifer A. Cundiff, Alexander V. Predeus, Karsten Hokamp, Jay C.D. Hinton, Leigh A. Knodler, [Niche-specific profiling reveals transcriptional adaptations required for the cytosolic lifestyle of Salmonella enterica](https://www.biorxiv.org/content/10.1101/2021.01.11.426201v2)
+TuShun R. Powers, Amanda L. Haeberle, Disa L. Hammarlöf, Jennifer A. Cundiff, Alexander V. Predeus, Karsten Hokamp, Jay C.D. Hinton, Leigh A. Knodler, [Niche-specific profiling reveals transcriptional adaptations required for the cytosolic lifestyle of Salmonella enterica](https://www.biorxiv.org/content/10.1101/2021.01.11.426201v2), *bioRxiv*, **2021**. 
 
 ## Sources
 
-The data was extracted from the following published sources: 
+The data was extracted from the following published sources; for reproducibility, Excel tables and other previously published data files are provided in `/supp_tables` directory.  
 
 * [Colgan et al. 2016](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006258) - used up- and down-regulated genes in regulator mutants were taken from [Table S3](https://doi.org/10.1371/journal.pgen.1006258.s011). The expression values are also available from [SalComRegulon](http://bioinf.gen.tcd.ie/cgi-bin/salcom.pl?db=SalComRegulon_HL). 
 * [Canals et al. 2019](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000059) - used expression values for 17 *in vitro* conditions for 4/74 and D23580 strains can be taken from [Table S5](https://doi.org/10.1371/journal.pbio.3000059.s005), or from [SalComD23580](http://bioinf.gen.tcd.ie/cgi-bin/salcom_v2.pl?_HL). 
@@ -21,9 +21,9 @@ The data was extracted from the following published sources:
 
 ## Processing 
 
-Custom curated gene sets (SPI1 plus effectors, SPI2 plus effectors, Iron transporters and siderophores) were compiled using many literature sources that are listed in *Salmonella custom pathways.xlsx*. For data from Colgan 2016, Fink 2007, Troxell 2011, and Smith 2016, supplementary tables with differentially expressed genes were used. Whenever the authors used a different reference strain, gene IDs were converted using provided ortholog table (see **orthologs** directory). 
+Custom curated gene sets (SPI1 plus effectors, SPI2 plus effectors, Iron transporters and siderophores) were compiled using many literature sources that are listed in *Salmonella custom pathways.xlsx*. For data from Colgan 2016, Fink 2007, Troxell 2011, and Smith 2016, supplementary tables with differentially expressed genes were used. Whenever the authors used a different reference strain, gene IDs were converted using provided ortholog table (see `/orthologs` directory). 
 
-For single-replicate RNA-seq experiments profiling 4/74 and D23580 under 17 *in vitro* conditions, the following strategy was used. Tables of TPM-normalized expression values (see **supp_tables**/474.tsv,D23.tsv) were used to calculate fold change of a particular condition with regard to 16 others. Genes with log2FC of 2 or more were selected as "marker" genes for a particular *in vitro* condition. All lists can be generated using the following command: 
+For single-replicate RNA-seq experiments profiling 4/74 and D23580 under 17 *in vitro* conditions, the following strategy was used. Tables of TPM-normalized expression values (see 474.tsv,D23.tsv in `/supp_tables`) were used to calculate fold change of a particular condition with regard to 16 others. Genes with log2FC of 2 or more were selected as "marker" genes for a particular *in vitro* condition. All lists can be generated using the following command: 
 
 `./calculate_fc_tpm.pl 474.tsv` 
 
@@ -33,6 +33,6 @@ After all gene lists were generated, the following command was used to make one 
 for i in *.list; do TAG=${i%%.list}; awk -v v=$TAG '{print v"\t"$1}' $i; done > custom_80_pathways.tsv
 ```
 
-## Case study: analysis of *Salmonella* genes enriched in vacuole and cytosol
+## Use case: analysis of *Salmonella* genes enriched in vacuole and cytosol
 
-An example of pathway use can be found in *enrichment.R* script. Using our pathway compendium, we have annotated *Salmonella* genes up-regulated either in vacuole or cytosol compartments upon HeLa cell infection.
+After we have compiled the list of custom pathways, we have applied them to the analysis of RNA-seq experiments described in the paper above. Full analysis can be found in *de_and_enrichment.R* script.
