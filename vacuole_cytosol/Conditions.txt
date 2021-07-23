@@ -1,0 +1,5 @@
+Sample	Condition
+EBSS_rep1	EBSS
+EBSS_rep2	EBSS
+WTM_rep1	WTM
+WTM_rep2	WTM

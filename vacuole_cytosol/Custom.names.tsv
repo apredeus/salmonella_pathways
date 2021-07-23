@@ -1,0 +1,80 @@
+Colgan_2016_barA_sirA_dn	Genes down-regulated in barA-sirA mutant
+Colgan_2016_dam_dn	Genes down-regulated in dam mutant
+Colgan_2016_dam_up	Genes up-regulated in dam mutant
+Colgan_2016_fliZ_dn	Genes down-regulated in fliZ mutant
+Colgan_2016_fliZ_up	Genes up-regulated in fliZ mutant
+Colgan_2016_fur_dn	Genes down-regulated in fur mutant
+Colgan_2016_fur_up	Genes up-regulated in fur mutant
+Colgan_2016_hfq_dn	Genes down-regulated in hfq mutant
+Colgan_2016_hfq_up	Genes up-regulated in hfq mutant
+Colgan_2016_hilA_dn	Genes down-regulated in hilA mutant
+Colgan_2016_hilC_dn	Genes down-regulated in hilC mutant
+Colgan_2016_hilC_up	Genes up-regulated in hilC mutant
+Colgan_2016_hilD_ESP_dn	Genes down-regulated in hilD mutant in early stationary phase
+Colgan_2016_hilD_ESP_up	Genes up-regulated in hilD mutant in early stationary phase
+Colgan_2016_hilD_IEP_dn	Genes down-regulated in hilD mutant mid-exponential phase
+Colgan_2016_hilE_dn	Genes down-regulated in hilE mutant
+Colgan_2016_ompR_envZ_dn	Genes down-regulated in ompR-envZ mutant
+Colgan_2016_ompR_envZ_up	Genes up-regulated in ompR-envZ mutant
+Colgan_2016_phoPQ_dn	Genes down-regulated in phoPQ mutant
+Colgan_2016_phoPQ_up	Genes up-regulated in phoPQ mutant
+Colgan_2016_rpoS_dn	Genes down-regulated in rpoS mutant
+Colgan_2016_rpoS_up	Genes up-regulated in rpoS mutant
+Colgan_2016_slyA_dn	Genes down-regulated in slyA mutant
+Colgan_2016_slyA_up	Genes up-regulated in slyA mutant
+Colgan_2016_ssrA_dn	Genes down-regulated in ssrA mutant
+Colgan_2016_ssrA_up	Genes up-regulated in ssrA mutant
+Colgan_2016_ssrB_dn	Genes down-regulated in ssrB mutant
+Colgan_2016_ssrB_up	Genes up-regulated in ssrB mutant
+D23_25C	D23580 genes up-regulated upon 25C shock
+D23_Bile	D23580 genes up-regulated upon bile acid shock
+D23_EEP	D23580 genes up-regulated in early exponential phase
+D23_ESP	D23580 genes up-regulated in early stationary phase
+D23_InSPI2	D23580 genes up-regulated under InSPI2 conditions
+D23_LEP	D23580 genes up-regulated in late exponential phase
+D23_Low_Fe	D23580 genes up-regulated upon low Fe shock
+D23_LSP	D23580 genes up-regulated in late stationary phase
+D23_Macrophage	D23580 genes up-regulated in macrophages
+D23_MEP	D23580 genes up-regulated in mid-exponential phase
+D23_NaCl	D23580 genes up-regulated upon NaCl shock
+D23_NO	D23580 genes up-regulated upon nitric oxide shock
+D23_NonSPI2	D23580 genes up-regulated under NonSPI2 conditions
+D23_NoO2	D23580 genes up-regulated upon anaerobic growth
+D23_NoO2S	D23580 genes up-regulated upon anaerobic shock
+D23_Oxygen	D23580 genes up-regulated upon oxygen shock
+D23_Peroxide	D23580 genes up-regulated upon peroxide shock
+Fink_2007_fnr_dn	Genes down-regulated in fnr mutant
+Fink_2007_fnr_up	Genes up-regulated in fnr mutant
+Iron	Curated list of iron transporters and siderophores
+Smith_2016_hilA_dn	Genes down-regulated in hilA mutant
+Smith_2016_hilC_dn	Genes down-regulated in hilC mutant
+Smith_2016_hilC_up	Genes up-regulated in hilC mutant
+Smith_2016_hilD_dn	Genes down-regulated in hilD mutant
+Smith_2016_hilD_up	Genes up-regulated in hilD mutant
+Smith_2016_invF_dn	Genes down-regulated in invF mutant
+Smith_2016_rtsA_dn	Genes down-regulated in rtsA mutant
+Smith_2016_rtsB_dn	Genes down-regulated in rtsB mutant
+Smith_2016_rtsB_up	Genes up-regulated in rtsB mutant
+Smith_2016_sprB_dn	Genes down-regulated in sprB mutant
+Smith_2016_sprB_up	Genes up-regulated in sprB mutant
+SPI1_eff	SPI-1 genes and effectors
+SPI2_eff	SPI-2 genes and effectors
+ST474_25C	474 genes up-regulated upon 25C shock
+ST474_Bile	474 genes up-regulated upon bile acid shock
+ST474_EEP	474 genes up-regulated in early exponential phase
+ST474_ESP	474 genes up-regulated in early stationary phase
+ST474_InSPI2	474 genes up-regulated under InSPI2 conditions
+ST474_LEP	474 genes up-regulated in late exponential phase
+ST474_Low_Fe	474 genes up-regulated upon low Fe shock
+ST474_LSP	474 genes up-regulated in late stationary phase
+ST474_Macrophage	474 genes up-regulated in macrophages
+ST474_MEP	474 genes up-regulated in mid-exponential phase
+ST474_NaCl	474 genes up-regulated upon NaCl shock
+ST474_NO	474 genes up-regulated upon nitric oxide shock
+ST474_NonSPI2	474 genes up-regulated under NonSPI2 conditions
+ST474_NoO2	474 genes up-regulated upon anaerobic growth
+ST474_NoO2S	474 genes up-regulated upon anaerobic shock
+ST474_Oxygen	474 genes up-regulated upon oxygen shock
+ST474_Peroxide	474 genes up-regulated upon peroxide shock
+Troxell_2011_fur_dn	Genes down-regulated in fur mutant
+Troxell_2011_fur_up	Genes up-regulated in fur mutant
