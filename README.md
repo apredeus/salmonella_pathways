@@ -35,4 +35,4 @@ for i in *.list; do TAG=${i%%.list}; awk -v v=$TAG '{print v"\t"$1}' $i; done > 
 
 ## Use case: analysis of *Salmonella* genes enriched in vacuole and cytosol
 
-After we have compiled the list of custom pathways, we have applied them to the analysis of RNA-seq experiments described in the paper above. Full analysis can be found in *de_and_enrichment.R* script.
+After we have compiled the list of custom pathways, we have applied them to the analysis of RNA-seq experiments described in the paper above. Full analysis with all necessary files can be found in `/vacuole_cytosol/de_and_enrichment.R` script. 

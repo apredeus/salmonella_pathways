@@ -9,31 +9,7 @@ library(DESeq2)
 
 setwd("~/salmonella_pathways/vacuole_cytosol")
 
-## reference file structure and preparation
-## there are three groups of pathways: Custom, GO, and KEGG
-## each group has a pathways.tsv file (tab-separated 2 column list, pathway - gene ID), 
-## and names.tsv - name of each pathway (e.g. "oxidative phosphorylation")
-## the process of custom pathway curation is described in the README and the paper; 
-## GO names are taken from GO website, and GO mapping (pathway to gene) is obtained with InterProScan;
-## KEGG mapping is obtained using KEGGREST package as follows: 
 
-## path_list <- keggLink("pathway","sey")
-## pp        <- as.data.table(cbind(path_list,names(path_list)))
-## write.table(pp,"KEGG.pathways.tsv",quote = F,sep = "\t",col.names = F,row.names = F)
-## pvec     <- unique(pp$path_list)
-## NP       <- length(unique(pp$path_list))
-
-## for (i in 1:NP) { 
-##   p_id       <- pvec[i]
-##  cat(sprintf("Processing pathway number %d, pathway id %s\n",i,p_id))
-##  p_rec      <- keggGet(p_id)
-##  p_name     <- gsub(" - Salmonella enterica subsp. enterica serovar Typhimurium SL1344","",p_rec[[1]]$NAME)
-##   p_string   <- paste(p_id,p_name,sep="\t")
-##  cat(sprintf("%s\n",p_string))
-##  write(p_string,"KEGG.names.tsv",append=T)
-## } 
-
-## strangely enough, you also need to run dos2unix on the KEGGREST output.. 
 
 ################################### PART 1 - Differential expression analysis ######################################
 
@@ -135,204 +111,179 @@ res3$regulation[res3$log2FC < 0 & res3$padj <= 0.05] <- "up (vacuole)"
 
 confirmed <- read.table("confirmed.list")$V1
 res_label <- res3[res3$Gene_name %in% confirmed,]
+res_label <- res_label[res_label$significant == "FDR < 0.05",] ## only keep the significant ones
+res_label[res_label$Gene_name == "STM1868A",]$Gene_name <- "SL1802"
+res_label[res_label$Gene_name == "STM4042",]$Gene_name  <- "SL3990"
 
-res3$regulation[res3$Gene_name %in% res_label$Gene_name & res3$log2FC > 0] <- "confirmed (cytosol)"
-res3$regulation[res3$Gene_name %in% res_label$Gene_name & res3$log2FC < 0] <- "confirmed (vacuole)"
+res_label2 <- res3[res3$logp > 18,]
+res_label2[res_label2$Gene_name == "STM2243",]$Gene_name <- "SL2219"
+res_label3 <- res3[res3$logp > 7 & res3$log2FC > 0,]
 
-ggplot(res_label, aes(x = log2FC, y = logp)) +
-  geom_point(data = res_label, aes(size = log10(mean_tpm+2)))
+all_labels <- rbind(res_label,res_label2,res_label3)
+
+res3$confirmed <- "not confirmed"
+res3[res3$`474_ID` %in% res_label$`474_ID`,]$confirmed <- "confirmed"
+
+res4 <- res3[res3$confirmed == "not confirmed",]
+res5 <- res3[res3$confirmed == "confirmed",]
+
+## this is the best I came up with (and it's honestly not bad)
 
 theme_set(theme_bw(base_size = 14))
 ggplot(res3, aes(x = log2FC, y = logp)) +
-  geom_point(aes(color = regulation, size = log10(mean_tpm+1)), stroke = 0) + 
-  geom_label_repel(data = res_label, aes(label = Gene_name), size = 4) + 
+  geom_point(aes(color = regulation, size = log10(mean_tpm+1)),stroke = 0) + 
+  geom_point(aes(color = confirmed, size = log10(mean_tpm+1)),stroke = 0) + 
+  geom_label_repel(data = all_labels, aes(label = Gene_name), size = 4, max.overlaps = 20) + 
   scale_size_continuous(range = c(0.1,4)) + 
-  scale_color_manual(values = c("not significant"="#999999","up (cytosol)"="#E86850","up (vacuole)"="#587498","confirmed (cytosol)"="#00FF00","confirmed (vacuole)"="#00FFFF")) + 
+  scale_color_manual(values = c("not significant"="#999999","up (cytosol)"="#FF0000","up (vacuole)"="#0000FF","not confirmed"="#FFFFFF00","confirmed"="#000000")) + 
   xlab("log2 fold change") + 
   ylab("-log10 (adjusted p-value)") + 
   ggtitle("Volcano plot, EBSS vs. WTM (vacuole vs. cytosol)") + 
   theme(panel.grid.major = element_line(size = 0.25))
 
 
+
 ################################# PART 2 - Pathway enrichment analysis ####################################
 
+## reference file structure and preparation
+## there are three groups of pathways: Custom, GO, and KEGG
+## each group has a pathways.tsv file (tab-separated 2 column list, pathway - gene ID), 
+## and names.tsv - name of each pathway (e.g. "oxidative phosphorylation")
+## the process of custom pathway curation is described in the README and the paper; 
+## GO names are taken from GO website, and GO mapping (pathway to gene) is obtained with InterProScan;
+## KEGG mapping is obtained using KEGGREST package as follows: 
 
-## write_kegg_gmt("smar")
+## path_list <- keggLink("pathway","sey")
+## pp        <- as.data.table(cbind(path_list,names(path_list)))
+## write.table(pp,"KEGG.pathways.tsv",quote = F,sep = "\t",col.names = F,row.names = F)
+## pvec     <- unique(pp$path_list)
+## NP       <- length(unique(pp$path_list))
 
-## write_kegg_gmt is being finicky - seems to fail at keggGet("md:stm_M00001") requests
-## so I will use the old GMT file generated for Enteritidis
+## for (i in 1:NP) { 
+##   p_id       <- pvec[i]
+##  cat(sprintf("Processing pathway number %d, pathway id %s\n",i,p_id))
+##  p_rec      <- keggGet(p_id)
+##  p_name     <- gsub(" - Salmonella enterica subsp. enterica serovar Typhimurium SL1344","",p_rec[[1]]$NAME)
+##   p_string   <- paste(p_id,p_name,sep="\t")
+##  cat(sprintf("%s\n",p_string))
+##  write(p_string,"KEGG.names.tsv",append=T)
+## } 
 
-## it seems like there are more genes (~ 1750 vs 1500) available in gene symbols vs gene names. 
-## so as far as KEGG mappings go, it's good to use GMT that use original locus tags.
+## strangely enough, you also need to run dos2unix on the KEGGREST output.. 
 
-## GO to names obtained by parsing GO .obo file downloaded from geneontology.org
+path_genes    <- read.table("Custom.pathways.tsv",header = F)
+go_genes     <- read.table("GO.pathways.tsv",header = F)
+kegg_genes    <- read.table("KEGG.pathways.tsv",header = F)
 
-## get a list of KEGG pathways and modules
-## then convert all the IDs to gene names using unique locus_tag to name table from GFF
-## and write a combined GMT file with all the names 
+path_names <- read.table("Custom.names.tsv", sep = '\t', quote = "")
+go_names   <- read.table("GO.names.tsv",sep = '\t',quote = "")
+kegg_names <- read.table("KEGG.names.tsv",sep = '\t',quote = "")
 
-############## <- do this once 
+SL_universe     <- read.table("474_ID.list",header = F)$V1
 
-path_list <- keggLink("pathway","sey")
-pp        <- as.data.table(cbind(path_list,names(path_list)))
-write.table(pp,"sey.gene_to_pathway.tsv",quote = F,sep = "\t",col.names = F,row.names = F)
-pvec     <- unique(pp$path_list)
-NP       <- length(unique(pp$path_list))
+all_pathways <- rbind(path_genes,go_genes,kegg_genes)
+all_names    <- rbind(path_names,go_names,kegg_names)
+namevec <- all_names$V2
+names(namevec) <- all_names$V1
 
-for (i in 1:NP) { 
-  p_id       <- pvec[i]
-  cat(sprintf("Processing pathway number %d, pathway id %s\n",i,p_id))
-  p_rec      <- keggGet(p_id)
-  p_name     <- gsub(" - Salmonella enterica subsp. enterica serovar Typhimurium SL1344","",p_rec[[1]]$NAME)
-  
-  p_string   <- paste(p_id,p_name,sep="\t")
-  cat(sprintf("%s\n",p_string))
-  write(p_string,"sey.kegg_path_name.tsv",append=T)
-} 
-################# <---------- 
+#### now get lists 
+vacuole <- read.table("vacuole.tsv",header = T,sep = "\t",check.names = F)
+vac_genes <- vacuole$`474_ID`
+cytosol <- read.table("cytosol.tsv",header = T,sep = "\t",check.names = F)
+cyt_genes <- cytosol$`474_ID`
 
-## after this add 80 names to sey pathways 
-## we should now have everything we need 
-
-path2SL    <- read.table("sey.gene_to_pathway3.tsv",header = F)
-go2SL      <- read.table("sey_go_terms.tsv",header = F)
-go_names   <- read.table("GO_names.tsv",sep = '\t',quote = "")
-path_names <- read.table("sey.kegg_path_name.tsv", sep = '\t', quote = "")
-SL_uni     <- as.vector(read.table("sey.list",header = F)$V1)
-## little bit of this so we can annotate things yeah?
-govec <- go_names$V2
-names(govec) <- go_names$V1
-pathvec <- path_names$V2
-names(pathvec) <- path_names$V1
-
-
-Vacuole <- read.table("vacuole.tsv",header = T,sep = "\t")
-Vac_list <- as.vector(Vacuole[Vacuole$SL1344_fixed != "NONE",]$SL1344_fixed)
-#write.table(vac_list,"vac_stm.list",quote = F, row.names = F, col.names = F)
-
-Cytosol <- read.table("cytosol.tsv",header = T,sep = "\t")
-Cyt_list <- as.vector(Cytosol[Cytosol$SL1344_fixed != "NONE",]$SL1344_fixed)
-#write.table(cyt_list,"cyt_stm.list",quote = F, row.names = F, col.names = F)
-
-en_vac_path <- enricher(Vac_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
-en_vac_go   <- enricher(Vac_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
-
-en_cyt_path <- enricher(Cyt_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = path2SL)
-en_cyt_go   <- enricher(Cyt_list, universe = SL_uni, maxGSSize = 1000, minGSSize = 1, qvalueCutoff  = 0.1, TERM2GENE = go2SL)
+### calculate Fisher enrichment score
+vac_pathways <- enricher(vac_genes, universe=SL_universe, maxGSSize=1000, minGSSize=3, qvalueCutoff=0.1, TERM2GENE=all_pathways)
+cyt_pathways <- enricher(cyt_genes, universe=SL_universe, maxGSSize=1000, minGSSize=3, qvalueCutoff=0.1, TERM2GENE=all_pathways)
 
 ## annotate with pathway/GO names
-for (i in 1:length(en_vac_go@result$ID)) {
-  go_id <- en_vac_go@result$ID[i]
-  en_vac_go@result$Description[i] <- as.character(govec[go_id])
-  en_vac_go@result$GR[i] <- as.numeric(unlist(strsplit(en_vac_go@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(en_vac_go@result$GeneRatio[i],"/"))[2])
+for (i in 1:length(vac_pathways@result$ID)) {
+  pathway_id <- vac_pathways@result$ID[i]
+  vac_pathways@result$Description[i] <- as.character(namevec[pathway_id])
+  vac_pathways@result$GR[i] <- 
+    as.numeric(unlist(strsplit(vac_pathways@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(vac_pathways@result$GeneRatio[i],"/"))[2])
 }
 
-for (i in 1:length(en_cyt_go@result$ID)) {
-  go_id <- en_cyt_go@result$ID[i]
-  en_cyt_go@result$Description[i] <- as.character(govec[go_id])
-  en_cyt_go@result$GR[i] <- as.numeric(unlist(strsplit(en_cyt_go@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(en_cyt_go@result$GeneRatio[i],"/"))[2])
+for (i in 1:length(cyt_pathways@result$ID)) {
+  pathway_id <- cyt_pathways@result$ID[i]
+  cyt_pathways@result$Description[i] <- as.character(namevec[pathway_id])
+  cyt_pathways@result$GR[i] <- 
+    as.numeric(unlist(strsplit(cyt_pathways@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(cyt_pathways@result$GeneRatio[i],"/"))[2])
 }
 
-for (i in 1:length(en_vac_path@result$ID)) {
-  path_id <- en_vac_path@result$ID[i]
-  en_vac_path@result$Description[i] <- as.character(pathvec[path_id])
-  en_vac_path@result$GR[i] <- as.numeric(unlist(strsplit(en_vac_path@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(en_vac_path@result$GeneRatio[i],"/"))[2])
-}
+## take a quick look at things
+DT::datatable(as.data.frame(vac_pathways))
+DT::datatable(as.data.frame(cyt_pathways))
 
-for (i in 1:length(en_cyt_path@result$ID)) {
-  path_id <- en_cyt_path@result$ID[i]
-  en_cyt_path@result$Description[i] <- as.character(pathvec[path_id])
-  en_cyt_path@result$GR[i] <- as.numeric(unlist(strsplit(en_cyt_path@result$GeneRatio[i],"/"))[1])/as.numeric(unlist(strsplit(en_cyt_path@result$GeneRatio[i],"/"))[2])
-}
+vac_df <- as.data.frame(vac_pathways)
+cyt_df <- as.data.frame(cyt_pathways)
 
+vac_df$type <- "vacuole"
+cyt_df$type <- "cytosol"
+rownames(vac_df) <- 1:nrow(vac_df)
+rownames(cyt_df) <- 1:nrow(cyt_df)
 
-DT::datatable(as.data.frame(en_vac_go)) ## I likes!!!
-DT::datatable(as.data.frame(en_vac_path))
-DT::datatable(as.data.frame(en_cyt_go))
-DT::datatable(as.data.frame(en_cyt_path))
-
-tt1 <- rbind(as.data.frame(en_vac_path),as.data.frame(en_vac_go))
-tt2 <- rbind(as.data.frame(en_cyt_path),as.data.frame(en_cyt_go))
-
-tt1$type <- "vacuole"
-tt2$type <- "cytosol"
-rownames(tt1) <- 1:nrow(tt1)
-rownames(tt2) <- 1:nrow(tt2)
-all_res <- rbind(tt1,tt2)
+## make dataframe of all enriched pathways
+all_res      <- rbind(vac_df,cyt_df)
 all_res$type <- as.factor(all_res$type)
-write.table(all_res,"all_sig_pathways.tsv",quote = F,row.names = F,sep = "\t")
 all_res$Description <- factor(all_res$Description)
 
-## oui shall plot
-cbPalette     <- c("#0000ff", "#ff0000")
-fn            <- read.table("fix_names2.tsv",header = T,sep = "\t")
-ar1           <- merge(all_res,fn,by.x = "ID",by.y = "ID")
-ar1$Category  <- ifelse(grepl("UP",ar1$Fix_name),"regulon","other")
-ar1$Category  <- ifelse(grepl("DN",ar1$Fix_name),"regulon",ar1$Category)
-ar1$Category  <- ifelse(grepl("D23",ar1$Fix_name),"other",ar1$Category)
-ar1$Category  <- ifelse(grepl("4/74",ar1$Fix_name),"other",ar1$Category)
+## annotate the dataframe - convert overlapping gene IDs to gene names for interpretation
+gene_names <- rbind(vacuole,cytosol)[,c(1,4)]
+gnamevec <- gene_names$Gene_name
+names(gnamevec) <- gene_names$`474_ID`
 
-ar1$type      <- factor(ar1$type,levels = c("vacuole","cytosol"))
-ar1$Category  <- factor(ar1$Category,levels = c("regulon","other"))
+all_res$Names <- "NA"
 
-ar1$Description <- NULL
-ar1$Description2 <- NULL
-ar1$pvalue    <- NULL
-ar1$qvalue    <- NULL
-ar1$geneID    <- NULL
-ar1$Name      <- NULL
-
-##### change select.list file if you want more or fewer
-
-sel <- read.table("select.list",header = F,sep = "\t")$V1
-ar2 <- ar1[ar1$Fix_name %in% sel,]
-
-ggplot(ar2,aes(x = reorder(Fix_name,Count,FUN = sum),y = Count,fill = type)) + geom_bar(stat = "identity") + coord_flip() + 
-  scale_fill_manual(values = cbPalette) + ylab("Number of genes in overlap, log2 scale") + xlab("") + 
-  facet_grid(cols=vars(type),rows=vars(Category)) + theme_bw() + 
-  scale_y_continuous(trans = 'log2',breaks = c(0,5,10,20,40,80,160))
-
-preg <- ar2[ar2$Category == "regulon",]
-poth <- ar2[ar2$Category == "other",]
-
-preg$Fix_name <- factor(preg$Fix_name,levels = c("DinvF (Smith) - DN","DssrB - UP","DrtsA (Smith) - DN","DhilA - DN",
-                                                 "DhilA (Smith) - DN","DhilD (Smith) - DN","DhilD (MEP) - DN","DhilD (ESP) - DN","DrpoS - UP","DsprB (Smith) - DN",
-                                                 "DphoPQ - UP","DrpoS - DN","Dfur - DN","DslyA - UP",
-                                                 "DompR DenvZ - DN","DfliZ - DN","DbarA DsirA - DN",
-                                                 "Dhfq - DN","Dfur - UP","DslyA - DN","DssrB - DN","DphoPQ - DN"))
-poth$Fix_name <- factor(poth$Fix_name)
-
-p1 <- ggplot(preg,aes(x = Fix_name,y = Count,fill = type)) + geom_bar(stat = "identity") + coord_flip() + 
-  scale_fill_manual(values = cbPalette) + ylab("Number of genes (log2 scale)") + xlab("") + facet_grid(cols=vars(type)) + theme_bw() + 
-  scale_y_continuous(trans = 'log2',breaks = c(0,5,10,20,40,80,160),limits = c(1,160)) + theme(text = element_text(size = 14))
-p2 <- ggplot(poth,aes(x = reorder(Fix_name,Count,FUN = sum),y = Count,fill = type)) + geom_bar(stat = "identity") + coord_flip() + 
-  scale_fill_manual(values = cbPalette) + ylab("Number of genes (log2 scale)") + xlab("") + facet_grid(cols=vars(type)) + theme_bw() + 
-  scale_y_continuous(trans = 'log2',breaks = c(0,5,10,20,40,80,160),limits = c(1,160)) + theme(text = element_text(size = 14))
-p1 / p2 + plot_layout(heights = c(1.6,1))
-
-names <- list()
-sl_names <- read.table("sl_names.tsv",header = T)
-
-for (i in 1:nrow(sl_names)) { 
-  id <- sl_names[i,1]
-  gene_name <- sl_names[i,2]
-  names[[id]] <- gene_name
-}
-
-all_res$Name <- "NA"
 for (j in 1:nrow(all_res)) { 
   ids <- all_res[j,8]
   ids_list <- as.list(unlist(strsplit(ids,"/")))
   namestr <- ""
   for (k in 1:length(ids_list)) { 
     id <- ids_list[[k]]
-    namestr <- ifelse (namestr == "",names[[id]],paste(namestr,names[[id]],sep = ","))
+    namestr <- ifelse (namestr == "",gnamevec[[id]],paste(namestr,gnamevec[[id]],sep = ","))
   } 
   all_res[j,12] <- namestr
 }
 
-write.table(all_res,"ann_sig_pathways4.tsv",quote = F,sep = "\t",row.names = F)
-dsel <- fn[fn$Fix_name %in% sel,]$Description2
-all_resf <- all_res[all_res$Description %in% dsel,]
-write.table(all_resf,"select_sig_pathways4.tsv",quote = F,sep = "\t",row.names = F)
+write.table(all_res,"annotated_significant_pathways.tsv",quote = F,sep = "\t",row.names = F)
+
+## we then inspect the pathways and decide which ones to keep and which ones to remove. 
+
+curated           <- read.table("curated_pathways.tsv",header = T,sep = "\t")
+curated           <- curated[curated$Retain == "yes",]
+curated$Names     <- NULL
+curated$Description <- NULL
+
+curated$Condition <- factor(curated$Condition,levels=c("vacuole","cytosol"))
+curated$Type      <- factor(curated$Type,levels = c("regulon","other"))
+curated$Simple    <- factor(curated$Simple)
+
+## plotting works best like this
+cbPalette     <- c("#0000ff", "#ff0000")
+
+
+preg <- curated[curated$Type == "regulon",]
+poth <- curated[curated$Type == "other",]
+
+preg$Simple <- factor(preg$Simple,levels = c("DinvF (Smith) - DN","DssrB - UP","DrtsA (Smith) - DN","DhilA - DN",
+                                                 "DhilA (Smith) - DN","DhilD (Smith) - DN","DhilD (MEP) - DN","DhilD (ESP) - DN","DrpoS - UP",
+                                                 "DphoPQ - UP","DrpoS - DN","Dfur - DN","DslyA - UP",
+                                                 "DompR DenvZ - DN","DfliZ - DN","DbarA DsirA - DN",
+                                                 "Dhfq - DN","Dfur - UP","DslyA - DN","DssrB - DN","DphoPQ - DN"))
+poth$Simple <- factor(poth$Simple)
+
+p1 <- ggplot(preg,aes(x = Simple,y = Count,fill = Condition)) + geom_bar(stat = "identity") + coord_flip() + 
+  scale_fill_manual(values = cbPalette) + ylab("Number of genes (log2 scale)") + xlab("") + facet_grid(cols=vars(Condition)) + theme_bw() + 
+  scale_y_continuous(trans = 'log2',breaks = c(0,5,10,20,40,80,160),limits = c(1,200)) + theme(text = element_text(size = 14))
+p2 <- ggplot(poth,aes(x = reorder(Simple,Count,FUN = sum),y = Count,fill = Condition)) + geom_bar(stat = "identity") + coord_flip() + 
+  scale_fill_manual(values = cbPalette) + ylab("Number of genes (log2 scale)") + xlab("") + facet_grid(cols=vars(Condition)) + theme_bw() + 
+  scale_y_continuous(trans = 'log2',breaks = c(0,5,10,20,40,80,160),limits = c(1,200)) + theme(text = element_text(size = 14))
+p1 / p2 + plot_layout(heights = c(1.6,1))
+
+
+
+
+
+
 
